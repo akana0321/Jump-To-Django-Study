@@ -135,3 +135,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+# Cascading Style Sheet 파일은 스태틱 디렉터리에 저장해야 함
+STATICFILES_DIRS = [
+    BASE_DIR / 'static'
+]
