@@ -46,7 +46,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'django.contrib.admin',
-    'django.contrib.auth',
+    'django.contrib.auth', # 로그인, 로그아웃을 도와주는 부분
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -54,6 +54,7 @@ INSTALLED_APPS = [
 
     # this is custom field
     'pybo.apps.PyboConfig',
+    'common.apps.CommonConfig',
 ]
 
 MIDDLEWARE = [
@@ -139,3 +140,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
+
+# 로그인 성공 후 이동하는 URL
+LOGIN_REDIRECT_URL = '/'
+
+# 로그아웃 시 이동하는 URL
+LOGOUT_REDIRECT_URL = '/'
