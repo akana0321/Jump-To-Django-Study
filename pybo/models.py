@@ -2,21 +2,23 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Question(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE) # 글쓴이
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='author_question') # 글쓴이
     modify_date = models.DateTimeField(null=True, blank=True) # 수정 일시
     subject = models.CharField(max_length=200) # 질문의 제목
     content = models.TextField()               # 질문의 내용
     create_date = models.DateTimeField()       # 질문을 작성한 일시
+    voter = models.ManyToManyField(User, related_name='voter_question') # 추천인 추가
 
     def __str__(self):
         return self.subject
 
 class Answer(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True) # 글쓴이
+    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='author_answer') # 글쓴이
     modify_date = models.DateTimeField(null=True, blank=True) # 수정 일시
     question = models.ForeignKey(Question, on_delete=models.CASCADE) # 질문
     content = models.TextField()         # 답변의 내용
     create_date = models.DateTimeField() # 답변을 작성한 일시
+    voter = models.ManyToManyField(User, related_name='voter_answer') # 추천인
 
 class Comment(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
